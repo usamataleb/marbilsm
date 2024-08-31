@@ -1,0 +1,22 @@
+
+ import "./user.zmodel"  
+ import "./task.zmodel"  
+ import "./projectClient.zmodel"  
+
+model Project {
+
+    id                String        @id @default(uuid())  
+    name            String?          
+    description  String?          
+    startDate  String?          
+    endDate      String?          
+    status        String?          
+    userId        String?          
+    user            User?            @relation(fields: [userId], references: [id], name:"user")  
+
+tasks          Task[]        @relation("project")  
+    projectClients  ProjectClient[]  @relation("project")  
+      dateCreated DateTime @default(now())
+      dateUpdated DateTime @updatedAt  @default(now())
+      @@allow("all", true)
+}

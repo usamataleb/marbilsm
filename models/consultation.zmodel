@@ -1,0 +1,19 @@
+
+ import "./user.zmodel"  
+ import "./client.zmodel"  
+
+model Consultation {
+
+    id                String        @id @default(uuid())  
+    date            String?          
+    duration    String?          
+    notes          String?          
+    userId        String?          
+    user            User?            @relation(fields: [userId], references: [id], name:"user")  
+    clientId    String?          
+    client        Client?        @relation(fields: [clientId], references: [id], name:"client")  
+
+dateCreated DateTime @default(now())
+      dateUpdated DateTime @updatedAt  @default(now())
+      @@allow("all", true)
+}

@@ -1,0 +1,18 @@
+
+ import "./client.zmodel"  
+ import "./payment.zmodel"  
+
+model Invoice {
+
+    id                String        @id @default(uuid())  
+    amount        String?          
+    dueDate      String?          
+    status        String?          
+    clientId    String?          
+    client        Client?        @relation(fields: [clientId], references: [id], name:"client")  
+
+payments    Payment[]  @relation("invoice")  
+      dateCreated DateTime @default(now())
+      dateUpdated DateTime @updatedAt  @default(now())
+      @@allow("all", true)
+}

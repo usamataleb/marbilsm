@@ -1,0 +1,16 @@
+
+ import "./invoice.zmodel"  
+
+model Payment {
+
+    id                String        @id @default(uuid())  
+    amount        String?          
+    date            String?          
+    method        String?          
+    invoiceId  String?          
+    invoice      Invoice?      @relation(fields: [invoiceId], references: [id], name:"invoice")  
+
+dateCreated DateTime @default(now())
+      dateUpdated DateTime @updatedAt  @default(now())
+      @@allow("all", true)
+}
